@@ -16,7 +16,7 @@ import {
 
 // 🔴 ATENÇÃO: Troque pelo IP do seu computador na rede Wi-Fi!
 // Exemplo: http://192.168.1.15:3001/api
-const API_URL = "http://192.168.200.27:3001/api";
+const API_URL = "http://192.168.137.235:3001/api";
 
 const TIPOS_EQUIP = [
   "Camara Fria Resfriada",
