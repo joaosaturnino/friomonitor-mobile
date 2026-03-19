@@ -35,7 +35,7 @@ import { io } from "socket.io-client";
 import { createStyles, getTheme } from "./_styles";
 
 // 🔴 ATENÇÃO: Troque pelo IP do seu servidor Node.js
-const BASE_IP = "http://192.168.200.27:3001";
+const BASE_IP = "http://192.168.137.183:3001";
 const API_URL = `${BASE_IP}/api`;
 const screenWidth = Dimensions.get("window").width;
 
@@ -494,7 +494,7 @@ export default function App() {
                 }","${r.temperatura}","${r.umidade}"\n`;
         });
         const fileUri =
-          FileSystem.documentDirectory + `PharmaX_Export_${Date.now()}.csv`;
+          FileSystem.documentDirectory + `FrioMonitor_Export_${Date.now()}.csv`;
         await FileSystem.writeAsStringAsync(fileUri, csv, {
           encoding: FileSystem.EncodingType.UTF8,
         });
@@ -520,7 +520,7 @@ export default function App() {
               }</td><td>${r.umidade}</td></tr>`),
           );
 
-        const html = `<html><head><style>body {font-family: sans-serif;} table {width: 100%; border-collapse: collapse;} th, td {border: 1px solid #ddd; padding: 12px; text-align: left;} th {background-color: #059669; color: white;}</style></head><body><h2>PharmaX - Relatório Oficial</h2><table><tr>${
+        const html = `<html><head><style>body {font-family: sans-serif;} table {width: 100%; border-collapse: collapse;} th, td {border: 1px solid #ddd; padding: 12px; text-align: left;} th {background-color: #059669; color: white;}</style></head><body><h2>FrioMonitor - Relatório Oficial</h2><table><tr>${
           abaAtiva === "historico"
             ? "<th>Data</th><th>Equipamento</th><th>Ocorrência</th><th>Ação</th>"
             : "<th>Data</th><th>Equipamento</th><th>Temp (°C)</th><th>Hum (%)</th>"
@@ -683,7 +683,7 @@ export default function App() {
             color={theme.primary}
             style={{ textAlign: "center", marginBottom: 10 }}
           />
-          <Text style={styles.loginTitle}>PharmaX</Text>
+          <Text style={styles.loginTitle}>FrioMonitor</Text>
           <Text style={styles.loginSubtitle}>Enterprise Telemetry</Text>
           <TextInput
             style={styles.input}
@@ -1481,13 +1481,13 @@ export default function App() {
       >
         <View style={styles.sidebarHeader}>
           <Ionicons name="snow" size={32} color="white" />
-          <Text style={styles.sidebarTitle}>PharmaX</Text>
+          <Text style={styles.sidebarTitle}>FrioMonitor</Text>
         </View>
         <ScrollView style={{ paddingVertical: 10 }}>
           {[
             { id: "dashboard", icon: "grid", label: "Visão Global" },
             { id: "motores", icon: "thermometer", label: "Painel Termómetros" },
-            { id: "umidade", icon: "water", label: "Controlo Higrómetros" },
+            { id: "umidade", icon: "water", label: "Controle Higrómetros" },
             {
               id: "equipamentos",
               icon: "server",
