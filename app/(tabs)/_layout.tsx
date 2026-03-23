@@ -15,7 +15,7 @@ export default function TabLayout() {
         tabBarStyle: { display: "none" },
       }}
     >
-      <Tabs.Screen name="index" options={{ title: "FrioMonitor" }} />
+      <Tabs.Screen name="index" options={{ title: "TermoSync" }} />
       <Tabs.Screen name="explore" options={{ href: null }} />
     </Tabs>
   );

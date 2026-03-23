@@ -35,7 +35,7 @@ import { io } from "socket.io-client";
 import { createStyles, getTheme } from "./_styles";
 
 // 🔴 ATENÇÃO: Troque pelo IP do seu servidor Node.js
-const BASE_IP = "http://192.168.137.183:3001";
+const BASE_IP = "http://10.13.181.164:3001";
 const API_URL = `${BASE_IP}/api`;
 const screenWidth = Dimensions.get("window").width;
 
@@ -288,7 +288,7 @@ export default function App() {
   };
 
   const verificarLogin = async () => {
-    const tokenSalvo = await AsyncStorage.getItem("tokenFrioMonitorWeb");
+    const tokenSalvo = await AsyncStorage.getItem("tokenTermoSyncWeb");
     if (tokenSalvo) setToken(tokenSalvo);
     setLoading(false);
   };
@@ -332,7 +332,7 @@ export default function App() {
     try {
       const res = await axios.post(`${API_URL}/login`, { usuario, senha });
       setToken(res.data.token);
-      await AsyncStorage.setItem("tokenFrioMonitorWeb", res.data.token);
+      await AsyncStorage.setItem("tokenTermoSyncWeb", res.data.token);
       mostrarToast("Acesso Autorizado", "success");
     } catch (error) {
       mostrarToast("Credenciais incorretas.", "error");
@@ -342,7 +342,7 @@ export default function App() {
   const fazerLogout = async () => {
     setToken("");
     setMenuAberto(false);
-    await AsyncStorage.removeItem("tokenFrioMonitorWeb");
+    await AsyncStorage.removeItem("tokenTermoSyncWeb");
   };
 
   const carregarRelatorios = async () => {
@@ -494,7 +494,7 @@ export default function App() {
                 }","${r.temperatura}","${r.umidade}"\n`;
         });
         const fileUri =
-          FileSystem.documentDirectory + `FrioMonitor_Export_${Date.now()}.csv`;
+          FileSystem.documentDirectory + `TermoSync_Export_${Date.now()}.csv`;
         await FileSystem.writeAsStringAsync(fileUri, csv, {
           encoding: FileSystem.EncodingType.UTF8,
         });
@@ -520,7 +520,7 @@ export default function App() {
               }</td><td>${r.umidade}</td></tr>`),
           );
 
-        const html = `<html><head><style>body {font-family: sans-serif;} table {width: 100%; border-collapse: collapse;} th, td {border: 1px solid #ddd; padding: 12px; text-align: left;} th {background-color: #059669; color: white;}</style></head><body><h2>FrioMonitor - Relatório Oficial</h2><table><tr>${
+        const html = `<html><head><style>body {font-family: sans-serif;} table {width: 100%; border-collapse: collapse;} th, td {border: 1px solid #ddd; padding: 12px; text-align: left;} th {background-color: #059669; color: white;}</style></head><body><h2>TermoSync - Relatório Oficial</h2><table><tr>${
           abaAtiva === "historico"
             ? "<th>Data</th><th>Equipamento</th><th>Ocorrência</th><th>Ação</th>"
             : "<th>Data</th><th>Equipamento</th><th>Temp (°C)</th><th>Hum (%)</th>"
@@ -683,7 +683,7 @@ export default function App() {
             color={theme.primary}
             style={{ textAlign: "center", marginBottom: 10 }}
           />
-          <Text style={styles.loginTitle}>FrioMonitor</Text>
+          <Text style={styles.loginTitle}>TermoSync</Text>
           <Text style={styles.loginSubtitle}>Enterprise Telemetry</Text>
           <TextInput
             style={styles.input}
@@ -1481,7 +1481,7 @@ export default function App() {
       >
         <View style={styles.sidebarHeader}>
           <Ionicons name="snow" size={32} color="white" />
-          <Text style={styles.sidebarTitle}>FrioMonitor</Text>
+          <Text style={styles.sidebarTitle}>TermoSync</Text>
         </View>
         <ScrollView style={{ paddingVertical: 10 }}>
           {[
